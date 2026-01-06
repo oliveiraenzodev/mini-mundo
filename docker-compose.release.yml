@@ -21,10 +21,6 @@ services:
     ports:
       - "8080:8080"
       - "9990:9990"
-    environment:
-      JAVA_OPTS: >-
-        -Djboss.node.name=mini-mundo-node
-        -Dcom.arjuna.ats.arjuna.xa.nodeIdentifier=mini-mundo-tx
 
 volumes:
   postgres_data:

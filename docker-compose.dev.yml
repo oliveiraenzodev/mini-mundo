@@ -1,8 +1,6 @@
 services:
   db:
     image: postgres:9
-    container_name: mini-mundo-db
-    restart: unless-stopped
     environment:
       POSTGRES_DB: mini_mundo
       POSTGRES_USER: mini_mundo
@@ -13,29 +11,18 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    image: jboss/wildfly:8.2.1.Final
-    container_name: mini-mundo-app
-    restart: unless-stopped
-    depends_on:
-      - db
+    build: .
     ports:
       - "8080:8080"
       - "9990:9990"
+    depends_on:
+      - db
     environment:
-      JAVA_OPTS: >-
-        -Djboss.node.name=mini-mundo-node
-        -Dcom.arjuna.ats.arjuna.xa.nodeIdentifier=mini-mundo-tx
-    volumes:
-      - ./target/mini-mundo.war:/opt/jboss/wildfly/standalone/deployments/mini-mundo.war
-
-      - ./docker/wildfly/modules/org/postgresql/main/module.xml:/opt/jboss/wildfly/modules/system/layers/base/org/postgresql/main/module.xml
-      - ./docker/wildfly/modules/org/postgresql/main/postgresql-9.2-1003-jdbc3.jar:/opt/jboss/wildfly/modules/system/layers/base/org/postgresql/main/postgresql-9.2-1003-jdbc3.jar
-
-      - ./docker/wildfly/init.cli:/opt/jboss/wildfly/init.cli
-      - ./docker/wildfly/standalone.xml:/opt/jboss/wildfly/standalone/configuration/standalone.xml
-      - ./docker/wildfly/entrypoint.sh:/opt/jboss/wildfly/entrypoint.sh
-
-    command: ["/bin/bash", "/opt/jboss/wildfly/entrypoint.sh"]
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: mini_mundo
+      DB_USER: mini_mundo
+      DB_PASSWORD: mini_mundo
 
 volumes:
   postgres_data:
