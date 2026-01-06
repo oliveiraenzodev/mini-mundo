@@ -1,0 +1,83 @@
+pipeline {
+  agent any
+
+  environment {
+  DOCKERHUB_CREDENTIALS = 'dockerhub-credentials'
+  IMAGE_NAME = 'oliveiraenzodev/mini-mundo'
+  TAG_REGEX = '^(v|V)?(\\d+\\.)?(\\d+\\.)?(\\*|\\d)\\.?(hf\\d+|Hf\\d+|HF\\d+)?$'
+}
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+        sh 'git --version'
+      }
+    }
+
+    stage('Detect Tag') {
+      steps {
+        script {
+          def tag = env.TAG_NAME
+
+          if (!tag?.trim()) {
+            tag = sh(script: "git tag --points-at HEAD | head -n 1 || true", returnStdout: true).trim()
+          }
+
+          if (!tag?.trim()) {
+            error("Build sem TAG. Este pipeline publica imagem apenas quando houver TAG na master.")
+          }
+
+          if (!(tag ==~ /${env.TAG_REGEX}/)) {
+            error("TAG '${tag}' não bate com o regex exigido.")
+          }
+
+          env.APP_TAG = tag
+          echo "Tag detectada: ${env.APP_TAG}"
+        }
+      }
+    }
+
+    stage('Ensure master') {
+      steps {
+        script {
+          def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+          def isInMaster = sh(script: "git branch -r --contains HEAD | grep -q 'origin/master' && echo yes || echo no", returnStdout: true).trim()
+
+          if (isInMaster != 'yes') {
+            error("A TAG ${env.APP_TAG} não está na branch master (origin/master).")
+          }
+
+          echo "OK: tag está contida em master."
+        }
+      }
+    }
+
+    stage('Docker Build') {
+      steps {
+        sh """
+          docker build -t ${IMAGE_NAME}:${APP_TAG} .
+          docker tag ${IMAGE_NAME}:${APP_TAG} ${IMAGE_NAME}:latest
+        """
+      }
+    }
+
+    stage('Docker Login & Push') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
+          sh """
+            echo "$DH_PASS" | docker login -u "$DH_USER" --password-stdin
+            docker push ${IMAGE_NAME}:${APP_TAG}
+            docker push ${IMAGE_NAME}:latest
+          """
+        }
+      }
+    }
+  }
+
+  post {
+    always {
+      sh 'docker logout || true'
+    }
+  }
+}
