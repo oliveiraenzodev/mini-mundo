@@ -65,7 +65,7 @@ segurança e reprodutibilidade do ambiente.
 O projeto segue o modelo Gitflow:
 
 - master   → código estável / produção
-- develop  → integração contínua
+- dev  → integração contínua
 - feat/*   → implementação de funcionalidades
 - fix/*    → correções emergenciais
 
