@@ -1,6 +1,8 @@
 services:
   db:
     image: postgres:9
+    container_name: mini-mundo-db
+    restart: unless-stopped
     environment:
       POSTGRES_DB: mini_mundo
       POSTGRES_USER: mini_mundo
@@ -11,18 +13,14 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    build: .
+    image: oliveiraenzodev/mini-mundo:${APP_TAG:-latest}
+    container_name: mini-mundo-app
+    restart: unless-stopped
+    depends_on:
+      - db
     ports:
       - "8080:8080"
       - "9990:9990"
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_NAME: mini_mundo
-      DB_USER: mini_mundo
-      DB_PASSWORD: mini_mundo
 
 volumes:
   postgres_data:
