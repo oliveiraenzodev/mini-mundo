@@ -147,11 +147,11 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/jdbc/MiniMundoDS" pool-name="MiniMundoDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:postgresql://db:5432/mini_mundo</connection-url>
+                    <connection-url>jdbc:postgresql://${env.DB_HOST:db}:${env.DB_PORT:5432}/${env.DB_NAME:mini_mundo}</connection-url>
                     <driver>postgresql</driver>
                     <security>
-                        <user-name>mini_mundo</user-name>
-                        <password>mini_mundo</password>
+                        <user-name>${env.DB_USER:mini_mundo}</user-name>
+                        <password>${env.DB_PASSWORD:mini_mundo}</password>
                     </security>
                 </datasource>
                 <drivers>
