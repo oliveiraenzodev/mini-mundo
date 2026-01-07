@@ -15,7 +15,6 @@ public class ForgotPasswordBean implements Serializable {
     private String email;
 
     public void send() {
-        // MVP: feedback para UX (sem implementar email/token ainda)
         FacesContext.getCurrentInstance().addMessage(null,
             new FacesMessage(
                 FacesMessage.SEVERITY_INFO,
