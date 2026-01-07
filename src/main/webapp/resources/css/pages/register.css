@@ -1,0 +1,41 @@
+body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#form .ui-panel{
+  width: 100%;
+  max-width: 560px;
+}
+
+#form .ui-panel-content .ui-outputlabel{
+  margin-top: 10px;
+}
+
+#form .ui-panel-content .ui-message{
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+#form .ui-panel-content .ui-button{
+  width: 100%;
+  margin-top: 10px;
+}
+
+#form .ui-panel-content a{
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media (max-width: 480px){
+  body{
+    padding: 14px;
+  }
+  #form .ui-panel{
+    max-width: 100%;
+  }
+}
