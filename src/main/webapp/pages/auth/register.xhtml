@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title>Cadastro</title>
+
+  <h:outputStylesheet library="css" name="admin.css" />
+  <h:outputStylesheet library="css/pages" name="register.css" />
+</h:head>
+
+<h:body styleClass="page-auth page-register">
+  <ui:include src="../../fragments/global-loader.xhtml" />
+
+  <div class="auth-container">
+    <div class="section-title-page-auth">
+      <h1 class="title-page-auth">Mini Mundo</h1>
+    </div>
+
+    <h:form id="form" styleClass="form-register">
+      <p:growl id="growl" showDetail="true" />
+
+      <p:panel header="Cadastrar-se" styleClass="auth-panel">
+        <div class="form-fields">
+
+          <div class="field">
+            <p:outputLabel for="name" value="Nome completo" />
+            <p:inputText id="name"
+                         value="#{registerBean.name}"
+                         required="true"
+                         requiredMessage="Informe seu nome completo."
+                         placeholder="Seu nome completo"
+                         validatorMessage="O nome deve ter pelo menos 3 caracteres."
+                         styleClass="input-full">
+              <f:validateLength minimum="3" />
+            </p:inputText>
+
+            <p:message for="name" display="text" styleClass="field-message" />
+          </div>
+
+          <div class="field">
+            <p:outputLabel for="email" value="E-mail" />
+            <p:inputText id="email"
+                         value="#{registerBean.email}"
+                         required="true"
+                         requiredMessage="Informe seu e-mail."
+                         validatorMessage="Informe um e-mail válido."
+                         placeholder="seu@email.com"
+                         styleClass="input-full">
+              <f:validateRegex pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+            </p:inputText>
+
+            <p:message for="email" display="text" styleClass="field-message" />
+          </div>
+
+          <div class="field">
+            <p:outputLabel for="password" value="Senha" />
+            <p:password id="password"
+                        value="#{registerBean.password}"
+                        required="true"
+                        requiredMessage="Informe uma senha."
+                        placeholder="Digite sua senha"
+                        toggleMask="true"
+                        styleClass="input-full"
+                        validatorMessage="A senha deve ter pelo menos 6 caracteres.">
+              <f:validateLength minimum="6" />
+            </p:password>
+
+            <p:message for="password" display="text" styleClass="field-message" />
+          </div>
+
+          <div class="field">
+            <p:outputLabel for="confirm" value="Confirmar senha" />
+            <p:password id="confirm"
+                        value="#{registerBean.passwordConfirmation}"
+                        required="true"
+                        requiredMessage="Confirme sua senha."
+                        placeholder="Repita sua senha"
+                        toggleMask="true"
+                        styleClass="input-full" />
+
+            <p:message for="confirm" display="text" styleClass="field-message" />
+          </div>
+
+          <p:commandButton value="Cadastrar"
+                           action="#{registerBean.register}"
+                           process="@form"
+                           update="@form growl"
+                           styleClass="btn-primary btn-block" />
+
+          <h:link value="Voltar para o login" outcome="/pages/auth/login.xhtml" styleClass="auth-link" />
+        </div>
+      </p:panel>
+    </h:form>
+  </div>
+</h:body>
+
+</html>

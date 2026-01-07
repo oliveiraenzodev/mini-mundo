@@ -10,7 +10,7 @@
 
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Production</param-value>
+        <param-value>Development</param-value>
     </context-param>
 
     <servlet>
@@ -24,8 +24,18 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>br.com.minimundo.web.filter.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </filter-mapping>
+
     <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
+        <welcome-file>pages/auth/login.xhtml</welcome-file>
     </welcome-file-list>
 
 </web-app>
