@@ -18,9 +18,6 @@ public class LoginBean {
 
   private final AuthService authService = new AuthService();
 
-  /* ============================================================
-   * LOGIN
-   * ============================================================ */
   public void login() {
     AuthResult result = authService.login(email, password);
 
@@ -37,26 +34,20 @@ public class LoginBean {
 
     session.setAttribute("JWT_TOKEN", result.getToken());
 
-    redirect("/pages/dashboard.xhtml"); // ajuste se necessário
+    redirect("/pages/dashboard.xhtml");
   }
 
-  /* ============================================================
-   * LOGOUT
-   * ============================================================ */
   public void logout() {
     FacesContext fc = FacesContext.getCurrentInstance();
 
     HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
     if (session != null) {
-      session.invalidate(); // remove JWT_TOKEN e qualquer outro dado
+      session.invalidate();
     }
 
     redirect("/pages/auth/login.xhtml");
   }
 
-  /* ============================================================
-   * REDIRECT UTIL
-   * ============================================================ */
   private void redirect(String path) {
     try {
       String ctx = FacesContext.getCurrentInstance()
@@ -72,9 +63,6 @@ public class LoginBean {
     }
   }
 
-  /* ============================================================
-   * GETTERS / SETTERS
-   * ============================================================ */
   public String getEmail() { return email; }
   public void setEmail(String email) { this.email = email; }
 

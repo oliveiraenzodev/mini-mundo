@@ -17,7 +17,6 @@ public class AuthFilter implements Filter {
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
-    // no-op
   }
 
   @Override
@@ -30,11 +29,6 @@ public class AuthFilter implements Filter {
     final String uri = request.getRequestURI();
     final String ctx = request.getContextPath();
 
-    // -------------------------------------------------------------------------
-    // Public routes
-    // - JSF/PrimeFaces resources: /javax.faces.resource/*
-    // - Auth pages: /pages/auth/*
-    // -------------------------------------------------------------------------
     final boolean isResource = uri.startsWith(ctx + "/javax.faces.resource/");
     final boolean isAuthPage = uri.startsWith(ctx + "/pages/auth/");
 
@@ -43,9 +37,6 @@ public class AuthFilter implements Filter {
       return;
     }
 
-    // -------------------------------------------------------------------------
-    // Protected routes: require JWT in session
-    // -------------------------------------------------------------------------
     HttpSession session = request.getSession(false);
     String token = (session != null) ? (String) session.getAttribute("JWT_TOKEN") : null;
 
@@ -67,6 +58,5 @@ public class AuthFilter implements Filter {
 
   @Override
   public void destroy() {
-    // no-op
   }
 }
