@@ -29,24 +29,14 @@ public class ProjectBean implements Serializable {
 
   @PostConstruct
   public void init() {
-    // não faça refresh() aqui porque esse bean é usado em list e edit
-    // cada tela chama seu viewAction específico.
   }
 
-  /**
-   * Use no list.xhtml
-   */
   public void loadForList() {
     if (!FacesUtil.isPostback()) {
       refresh();
     }
   }
 
-  /**
-   * Use no edit.xhtml
-   * - Se vier id na URL, carrega o projeto
-   * - Se não vier, prepara um novo
-   */
   public void loadForEdit() {
     if (FacesUtil.isPostback()) {
       return;

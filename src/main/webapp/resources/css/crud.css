@@ -1,21 +1,12 @@
-/* =====================================================
-   CRUD UI KIT
-   Reutilizável para todos os CRUDs
-   Depende do admin.css (:root)
-   ===================================================== */
-
-/* -------- Layout base -------- */
 .crud-page{
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* -------- Painel -------- */
 .crud-panel.ui-panel{
   border-radius: var(--radius);
 }
 
-/* Header do painel (igual login) */
 .crud-panel .ui-panel-titlebar{
   margin: 0 !important;
   padding: 14px 16px !important;
@@ -36,12 +27,10 @@
   line-height: 1;
 }
 
-/* Conteúdo interno */
 .crud-panel .ui-panel-content{
   padding: 16px !important;
 }
 
-/* -------- Barra de ações -------- */
 .crud-actions{
   display: flex;
   gap: 10px;
@@ -50,7 +39,6 @@
   margin: 0 0 12px 0;
 }
 
-/* -------- Botões padrão -------- */
 .crud-btn{
   display: inline-flex;
   align-items: center;
@@ -64,7 +52,7 @@
   text-decoration: none !important;
 }
 
-/* Ghost (Ver / Editar fora da tabela) */
+
 .crud-btn--ghost{
   background: transparent !important;
   color: var(--primary) !important;
@@ -77,7 +65,6 @@
   background: rgba(59,130,246,.08) !important;
 }
 
-/* Danger */
 .crud-btn--danger.ui-button{
   background: var(--danger) !important;
 }
@@ -87,14 +74,12 @@
   box-shadow: 0 10px 22px rgba(239,68,68,.25) !important;
 }
 
-/* -------- DataTable -------- */
 .crud-table{
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* Cabeçalho */
 .crud-table thead th{
   background: #fff !important;
   background-image: none !important;
@@ -103,18 +88,15 @@
   font-weight: 900 !important;
 }
 
-/* Células */
 .crud-table tbody td{
   border-color: rgba(15,23,42,.06) !important;
   color: var(--text);
 }
 
-/* Hover */
 .crud-table tbody tr:hover{
   background: rgba(59,130,246,.05) !important;
 }
 
-/* -------- Coluna de ações (ícones) -------- */
 .crud-actions-col{
   display: flex;
   gap: 8px;
@@ -122,7 +104,6 @@
   align-items: center;
 }
 
-/* -------- Botão ícone -------- */
 .crud-icon{
   width: 36px;
   height: 36px;
@@ -141,19 +122,16 @@
   text-decoration: none !important;
 }
 
-/* Remove estilos do PrimeFaces */
 .crud-icon.ui-button{
   padding: 0 !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
-/* Ícone */
 .crud-icon .pi{
   font-size: 16px;
 }
 
-/* Primary (Ver / Editar) */
 .crud-icon--primary{
   color: var(--primary);
   border-color: rgba(59,130,246,.25);
@@ -164,7 +142,6 @@
   box-shadow: 0 6px 16px rgba(59,130,246,.25);
 }
 
-/* Danger (Excluir) */
 .crud-icon--danger{
   color: var(--danger) !important;
   border-color: rgba(239,68,68,.30) !important;
@@ -176,7 +153,6 @@
   box-shadow: 0 6px 16px rgba(239,68,68,.28);
 }
 
-/* -------- Paginator -------- */
 .crud-table .ui-paginator{
   background: #fff !important;
   background-image: none !important;
@@ -193,7 +169,6 @@
   border-radius: 10px !important;
 }
 
-/* -------- Responsivo -------- */
 @media (max-width: 640px){
   .crud-actions{
     gap: 8px;
@@ -213,14 +188,12 @@
   display: inline-flex;
   align-items: center;
 
-  /* tamanho equilibrado */
   padding: 10px !important;
   font-size: 14px;
   font-weight: 900 !important;
 
-  /* espaçamento vertical correto */
-  margin-top: 12px !important;   /* distância do topo / header */
-  margin-bottom: 16px !important;/* distância da tabela */
+  margin-top: 12px !important;
+  margin-bottom: 16px !important;
 
   border-radius: 12px;
 }
@@ -239,7 +212,6 @@
   border-radius: var(--radius) var(--radius) 0 0 !important;
 }
 
-/* título branco e forte */
 .crud-panel .ui-panel-titlebar .ui-panel-title,
 .projects-panel .ui-panel-titlebar .ui-panel-title{
   color: #fff !important;
@@ -248,7 +220,6 @@
   line-height: 1;
 }
 
-/* conteúdo do painel (fundo branco, espaçado) */
 .crud-panel .ui-panel-content,
 .projects-panel .ui-panel-content{
   background: #fff;

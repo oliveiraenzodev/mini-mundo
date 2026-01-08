@@ -10,21 +10,17 @@
       <f:viewAction action="#{projectBean.loadForList}" />
     </f:metadata>
 
-    <!-- UM ÚNICO FORM PARA TODA A PÁGINA -->
     <h:form id="form">
 
       <p:growl id="growl" showDetail="true" />
 
-      <!-- Confirm global (PF4): sem customizar botões -->
       <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" />
 
       <div class="projects-page">
 
         <p:panel header="Projetos" styleClass="crud-panel">
 
-          <!-- Ações da página -->
           <div class="projects-actions">
-            <!-- Navegação: use h:link no PF 4 pra evitar renderer problemático -->
             <h:link outcome="edit" styleClass="ui-button crud-btn crud-btn-new">
               Novo projeto
             </h:link>
@@ -50,19 +46,16 @@
             <p:column headerText="Ações" style="width:120px;text-align:center">
               <div class="crud-actions-col">
 
-                <!-- VER -->
                 <h:link outcome="view" styleClass="crud-icon crud-icon--primary" title="Visualizar">
                   <f:param name="id" value="#{p.id}" />
                   <span class="ui-icon ui-icon-search"></span>
                 </h:link>
 
-                <!-- EDITAR -->
                 <h:link outcome="edit" styleClass="crud-icon crud-icon--primary" title="Editar">
                   <f:param name="id" value="#{p.id}" />
                   <span class="ui-icon ui-icon-pencil"></span>
                 </h:link>
 
-                <!-- EXCLUIR -->
                 <p:commandButton icon="ui-icon-trash" styleClass="crud-icon crud-icon--danger" title="Excluir"
                   actionListener="#{projectBean.delete(p.id)}" update=":form:table :form:growl">
                 </p:commandButton>

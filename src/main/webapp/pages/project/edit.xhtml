@@ -25,7 +25,6 @@
 
           <div class="crud-form">
 
-            <!-- Nome -->
             <div class="crud-field">
               <p:outputLabel for="name" value="Nome *" />
 
@@ -33,22 +32,18 @@
                 requiredMessage="Informe o nome do projeto." maxlength="120" styleClass="crud-input"
                 style="width:100%" />
 
-              <!-- ERRO no padrão do login -->
               <p:message for="name" display="text" styleClass="field-message" />
             </div>
 
-            <!-- Descrição -->
             <div class="crud-field">
               <p:outputLabel for="desc" value="Descrição" />
 
               <p:inputTextarea id="desc" value="#{projectBean.project.description}" autoResize="false" rows="4"
                 styleClass="crud-input" style="width:100%" />
 
-              <!-- (opcional) se não quiser mensagem aqui, pode remover -->
               <p:message for="desc" display="text" styleClass="field-message" />
             </div>
 
-            <!-- Status -->
             <div class="crud-field">
               <p:outputLabel for="status" value="Status *" />
 

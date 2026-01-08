@@ -1,0 +1,80 @@
+.project-edit-page{
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.crud-form{
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.crud-field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.crud-input.ui-inputfield,
+.crud-select{
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  padding: 11px 12px !important;
+  background: #fff !important;
+  box-sizing: border-box;
+}
+
+.crud-input.ui-inputfield:focus{
+  border-color: rgba(59,130,246,.65) !important;
+  box-shadow: 0 0 0 4px rgba(59,130,246,.18) !important;
+}
+
+.crud-select.ui-selectonemenu{
+  padding: 0 !important;
+}
+.crud-select.ui-selectonemenu .ui-selectonemenu-label{
+  padding: 11px 12px !important;
+}
+.crud-select.ui-selectonemenu .ui-selectonemenu-trigger{
+  border-left: 1px solid rgba(15,23,42,.10) !important;
+}
+
+.crud-form-actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.crud-btn-primary.ui-button{
+  background: var(--primary) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 900 !important;
+  border-radius: 12px !important;
+  padding: 12px 18px !important;
+}
+
+.crud-btn-primary.ui-button:hover{
+  background: var(--primary-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(59,130,246,.25);
+}
+
+.crud-btn-secondary{
+  background: #fff !important;
+  color: var(--primary) !important;
+  border: 1px solid rgba(59,130,246,.28) !important;
+  font-weight: 900 !important;
+  border-radius: 12px !important;
+  padding: 12px 18px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none !important;
+}
+
+.crud-btn-secondary:hover{
+  background: rgba(59,130,246,.08) !important;
+}
