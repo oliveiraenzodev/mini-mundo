@@ -1,0 +1,98 @@
+<ui:composition template="/templates/app.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <ui:define name="title">Projeto</ui:define>
+
+  <ui:define name="styles">
+    <h:outputStylesheet library="css" name="pages/project/edit.css" />
+  </ui:define>
+
+  <ui:define name="content">
+
+    <f:metadata>
+      <f:viewAction action="#{projectBean.loadForEdit}" />
+    </f:metadata>
+
+    <h:form id="form">
+
+      <p:growl id="growl" showDetail="true" />
+
+      <div class="crud-page project-edit-page">
+
+        <p:panel header="#{projectBean.project.id == null ? 'Novo Projeto' : 'Editar Projeto'}"
+          styleClass="crud-panel project-edit-panel">
+
+          <div class="crud-form">
+
+            <!-- Nome -->
+            <div class="crud-field">
+              <p:outputLabel for="name" value="Nome *" />
+
+              <p:inputText id="name" value="#{projectBean.project.name}" required="true"
+                requiredMessage="Informe o nome do projeto." maxlength="120" styleClass="crud-input"
+                style="width:100%" />
+
+              <!-- ERRO no padrão do login -->
+              <p:message for="name" display="text" styleClass="field-message" />
+            </div>
+
+            <!-- Descrição -->
+            <div class="crud-field">
+              <p:outputLabel for="desc" value="Descrição" />
+
+              <p:inputTextarea id="desc" value="#{projectBean.project.description}" autoResize="false" rows="4"
+                styleClass="crud-input" style="width:100%" />
+
+              <!-- (opcional) se não quiser mensagem aqui, pode remover -->
+              <p:message for="desc" display="text" styleClass="field-message" />
+            </div>
+
+            <!-- Status -->
+            <div class="crud-field">
+              <p:outputLabel for="status" value="Status *" />
+
+              <p:selectOneMenu id="status" value="#{projectBean.project.status}" required="true"
+                requiredMessage="Selecione o status." styleClass="crud-select" style="width:220px">
+                <f:selectItem itemLabel="Selecione..." itemValue="#{null}" noSelectionOption="true" />
+                <f:selectItem itemLabel="Ativo" itemValue="ACTIVE" />
+                <f:selectItem itemLabel="Inativo" itemValue="INACTIVE" />
+              </p:selectOneMenu>
+
+              <p:message for="status" display="text" styleClass="field-message" />
+            </div>
+
+            <div class="crud-field">
+              <p:outputLabel for="budget" value="Orçamento disponível" />
+
+              <p:inputText id="budget" value="#{projectBean.project.budget}" styleClass="crud-input" style="width:220px"
+                placeholder="Ex: 99,99" converterMessage="Informe um valor válido. Ex.: 99,99">
+                <f:convertNumber locale="pt_BR" minFractionDigits="2" maxFractionDigits="2" />
+              </p:inputText>
+
+              <p:message for="budget" display="text" styleClass="field-message" />
+            </div>
+
+            <div class="crud-form-actions">
+
+              <p:commandButton value="Salvar" icon="ui-icon-check" actionListener="#{projectBean.save}" process="@form"
+                update=":form :form:growl" styleClass="crud-btn-primary" />
+
+              <h:link outcome="list" styleClass="ui-button crud-btn-secondary">
+                <span class="ui-icon ui-icon-arrowreturnthick-1-w"></span>
+                Voltar
+              </h:link>
+
+            </div>
+
+          </div>
+
+        </p:panel>
+
+      </div>
+
+    </h:form>
+
+  </ui:define>
+
+</ui:composition>
