@@ -18,7 +18,6 @@
 
     <dependencies>
 
-        <!-- WildFly 8.2 = Java EE 7 (CDI, JPA, JSF, JTA, Servlet etc já vêm do servidor) -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -26,28 +25,24 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- PrimeFaces -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>4.0</version>
         </dependency>
 
-        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
         </dependency>
 
-        <!-- BCrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
 
-        <!-- PostgreSQL: se você usa módulo/datasource no WildFly, deixe provided (ou remova) -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>

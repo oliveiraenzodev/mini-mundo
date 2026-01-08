@@ -3,20 +3,22 @@ package br.com.minimundo.web.bean;
 import br.com.minimundo.domain.auth.AuthResult;
 import br.com.minimundo.domain.auth.AuthService;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-@ManagedBean(name = "loginBean")
+@Named("loginBean")
 @RequestScoped
 public class LoginBean {
 
   private String email;
   private String password;
 
-  private final AuthService authService = new AuthService();
+  @Inject
+  private AuthService authService;
 
   public void login() {
     AuthResult result = authService.login(email, password);
@@ -34,7 +36,7 @@ public class LoginBean {
 
     session.setAttribute("JWT_TOKEN", result.getToken());
 
-    redirect("/pages/dashboard.xhtml");
+    redirect("/pages/project/list.xhtml");
   }
 
   public void logout() {
