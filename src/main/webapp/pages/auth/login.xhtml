@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title>Login</title>
+
+  <h:outputStylesheet library="css" name="admin.css" />
+  <h:outputStylesheet library="css/pages" name="login.css" />
+</h:head>
+
+<h:body styleClass="page-auth page-login">
+  <ui:include src="../../fragments/global-loader.xhtml" />
+
+  <div class="auth-container">
+    <div class="section-title-page-auth">
+      <h1 class="title-page-auth">Mini Mundo</h1>
+    </div>
+
+    <h:form id="form" styleClass="form-auth">
+      <p:growl id="growl" showDetail="true" />
+
+      <p:panel header="Entrar" styleClass="auth-panel">
+        <div class="form-fields">
+
+          <h:panelGroup rendered="#{not empty flash.REGISTER_SUCCESS}">
+            <div class="alert-success">
+              #{flash.REGISTER_SUCCESS}
+            </div>
+          </h:panelGroup>
+
+          <div class="field">
+            <p:outputLabel for="email" value="E-mail" />
+            <p:inputText id="email"
+                         value="#{loginBean.email}"
+                         required="true"
+                         requiredMessage="Informe seu e-mail."
+                         validatorMessage="Informe um e-mail válido."
+                         placeholder="seu@email.com"
+                         styleClass="input-full">
+              <f:validateRegex pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" />
+            </p:inputText>
+
+            <p:message for="email" display="text" styleClass="field-message" />
+          </div>
+
+          <div class="field">
+            <p:outputLabel for="password" value="Senha" />
+            <p:password id="password"
+                        value="#{loginBean.password}"
+                        required="true"
+                        requiredMessage="Informe sua senha."
+                        placeholder="Digite sua senha"
+                        feedback="false"
+                        toggleMask="true"
+                        styleClass="input-full" />
+
+            <p:message for="password" display="text" styleClass="field-message" />
+          </div>
+
+          <p:commandButton value="Entrar"
+                           action="#{loginBean.login}"
+                           process="@form"
+                           update="@form growl"
+                           styleClass="btn-primary btn-block" />
+
+          <div class="auth-links">
+            <h:link value="Cadastrar-se" outcome="/pages/auth/register.xhtml" />
+            <span class="dot">·</span>
+            <h:link value="Esqueci minha senha" outcome="/pages/auth/forgot-password.xhtml" />
+          </div>
+
+        </div>
+      </p:panel>
+    </h:form>
+  </div>
+</h:body>
+
+</html>

@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <header class="app-header">
+    <div class="app-header__inner">
+      <h:link outcome="/pages/project/list.xhtml" styleClass="app-brand">
+        Mini Mundo
+      </h:link>
+
+      <div class="app-header__actions">
+        <h:link outcome="/pages/project/list.xhtml" styleClass="app-link">
+          Projetos
+        </h:link>
+
+        <h:form id="headerForm" style="margin:0">
+          <p:commandButton value="Sair"
+                           icon="pi pi-sign-out"
+                           action="#{loginBean.logout}"
+                           ajax="false"
+                           styleClass="ui-button app-logout-btn" />
+        </h:form>
+      </div>
+    </div>
+  </header>
+
+</ui:composition>

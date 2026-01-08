@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS projects (
+  id BIGSERIAL PRIMARY KEY,
+
+  name VARCHAR(120) NOT NULL,
+  description TEXT NULL,
+
+  status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE',
+
+  budget NUMERIC(14, 2) NULL,
+
+  created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE projects
+  ADD CONSTRAINT chk_projects_status
+  CHECK (status IN ('ACTIVE', 'INACTIVE'));
+
+CREATE INDEX IF NOT EXISTS idx_projects_name_lower
+  ON projects (LOWER(name));

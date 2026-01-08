@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:9
+    container_name: mini-mundo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: mini_mundo
+      POSTGRES_USER: mini_mundo
+      POSTGRES_PASSWORD: mini_mundo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/db/init:/docker-entrypoint-initdb.d:ro
+
+  app:
+    image: oliveiraenzodev/mini-mundo:${APP_TAG:-latest}
+    container_name: mini-mundo-app
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+
+volumes:
+  postgres_data:

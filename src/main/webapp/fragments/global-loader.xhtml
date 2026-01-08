@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <p:ajaxStatus onstart="PF('loadingDlg').show();" onsuccess="PF('loadingDlg').hide();"
+        onerror="PF('loadingDlg').hide();" />
+
+    <p:dialog widgetVar="loadingDlg" modal="true" draggable="false" resizable="false" closable="false"
+        showHeader="false" appendTo="@(body)" styleClass="loading-dialog">
+
+        <div class="loading-box">
+            <span class="loading-spinner" aria-hidden="true"></span>
+            <span class="loading-text">Carregando...</span>
+        </div>
+
+    </p:dialog>
+
+</ui:composition>

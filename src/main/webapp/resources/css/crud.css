@@ -1,0 +1,227 @@
+.crud-page{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.crud-panel.ui-panel{
+  border-radius: var(--radius);
+}
+
+.crud-panel .ui-panel-titlebar{
+  margin: 0 !important;
+  padding: 14px 16px !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.25) !important;
+
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+
+.crud-panel .ui-panel-titlebar .ui-panel-title{
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.crud-panel .ui-panel-content{
+  padding: 16px !important;
+}
+
+.crud-actions{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 12px 0;
+}
+
+.crud-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  text-decoration: none !important;
+  cursor: pointer (important);
+}
+
+.crud-btn:hover{
+  text-decoration: none !important;
+}
+
+
+.crud-btn--ghost{
+  background: transparent !important;
+  color: var(--primary) !important;
+  border: 1px solid rgba(59,130,246,.28) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.crud-btn--ghost:hover{
+  background: rgba(59,130,246,.08) !important;
+}
+
+.crud-btn--danger.ui-button{
+  background: var(--danger) !important;
+}
+
+.crud-btn--danger.ui-button:hover{
+  background: rgba(239,68,68,.92) !important;
+  box-shadow: 0 10px 22px rgba(239,68,68,.25) !important;
+}
+
+.crud-table{
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.crud-table thead th{
+  background: #fff !important;
+  background-image: none !important;
+  border-color: rgba(15,23,42,.08) !important;
+  color: var(--text) !important;
+  font-weight: 900 !important;
+}
+
+.crud-table tbody td{
+  border-color: rgba(15,23,42,.06) !important;
+  color: var(--text);
+}
+
+.crud-table tbody tr:hover{
+  background: rgba(59,130,246,.05) !important;
+}
+
+.crud-actions-col{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.crud-icon{
+  width: 36px;
+  height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+  border: 1px solid transparent;
+
+  background: #fff;
+  cursor: pointer;
+
+  transition: all .15s ease;
+  text-decoration: none !important;
+}
+
+.crud-icon.ui-button{
+  padding: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.crud-icon .pi{
+  font-size: 16px;
+}
+
+.crud-icon--primary{
+  color: var(--primary);
+  border-color: rgba(59,130,246,.25);
+}
+
+.crud-icon--primary:hover{
+  background: rgba(59,130,246,.10);
+  box-shadow: 0 6px 16px rgba(59,130,246,.25);
+}
+
+.crud-icon--danger{
+  color: var(--danger) !important;
+  border-color: rgba(239,68,68,.30) !important;
+  background: #fff !important;
+}
+
+.crud-icon--danger:hover{
+  background: rgba(239,68,68,.12) !important;
+  box-shadow: 0 6px 16px rgba(239,68,68,.28);
+}
+
+.crud-table .ui-paginator{
+  background: #fff !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--border) !important;
+  padding: 10px 12px !important;
+}
+
+.crud-table .ui-paginator .ui-paginator-page,
+.crud-table .ui-paginator .ui-paginator-next,
+.crud-table .ui-paginator .ui-paginator-prev,
+.crud-table .ui-paginator .ui-paginator-first,
+.crud-table .ui-paginator .ui-paginator-last{
+  border-radius: 10px !important;
+}
+
+@media (max-width: 640px){
+  .crud-actions{
+    gap: 8px;
+  }
+
+  .crud-actions-col{
+    justify-content: flex-start;
+  }
+
+  .crud-actions .ui-button,
+  .crud-actions a.ui-button{
+    width: 100%;
+    justify-content: center;
+  }
+}
+.crud-btn-new{
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px !important;
+  font-size: 14px;
+  font-weight: 900 !important;
+
+  margin-top: 12px !important;
+  margin-bottom: 16px !important;
+
+  border-radius: 12px;
+}
+
+.crud-panel.ui-panel .ui-panel-titlebar,
+.projects-panel.ui-panel .ui-panel-titlebar{
+  margin: 0 !important;
+  padding: 14px 16px !important;
+
+  background: var(--primary) !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, .25) !important;
+
+  border-radius: var(--radius) var(--radius) 0 0 !important;
+}
+
+.crud-panel .ui-panel-titlebar .ui-panel-title,
+.projects-panel .ui-panel-titlebar .ui-panel-title{
+  color: #fff !important;
+  font-weight: 900 !important;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.crud-panel .ui-panel-content,
+.projects-panel .ui-panel-content{
+  background: #fff;
+  padding: 16px !important;
+}
