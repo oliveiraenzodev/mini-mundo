@@ -1,0 +1,79 @@
+<ui:composition template="/templates/app.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <ui:define name="title">Detalhes do Projeto</ui:define>
+
+  <ui:define name="content">
+
+    <f:metadata>
+      <f:viewAction action="#{projectBean.loadForView}" />
+    </f:metadata>
+
+    <h:form id="form">
+      <p:growl id="growl" showDetail="true" />
+
+      <div class="crud-page project-view-page">
+
+        <p:panel header="Detalhes do Projeto"
+                 styleClass="crud-panel crud-panel--primary project-view-panel">
+
+          <div class="crud-view">
+
+            <div class="crud-view-row">
+              <span class="crud-view-label">Nome</span>
+              <span class="crud-view-value">
+                <h:outputText value="#{projectBean.project.name}" />
+              </span>
+            </div>
+
+            <div class="crud-view-row">
+              <span class="crud-view-label">Status</span>
+              <span class="crud-view-value">
+                <h:outputText value="#{projectBean.project.status}" />
+              </span>
+            </div>
+
+            <div class="crud-view-row">
+              <span class="crud-view-label">Orçamento</span>
+              <span class="crud-view-value">
+                <h:outputText value="#{projectBean.project.budget}">
+                  <f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR" />
+                </h:outputText>
+              </span>
+            </div>
+
+            <div class="crud-view-row">
+              <span class="crud-view-label">Descrição</span>
+              <span class="crud-view-value">
+                <h:outputText value="#{empty projectBean.project.description ? '-' : projectBean.project.description}" />
+              </span>
+            </div>
+
+            <div class="crud-form-actions">
+              <h:link outcome="edit" styleClass="ui-button crud-btn-primary">
+                <f:param name="id" value="#{projectBean.project.id}" />
+                <span class="ui-icon ui-icon-pencil"></span>
+                Editar
+              </h:link>
+
+              <h:link outcome="list" styleClass="ui-button crud-btn-secondary">
+                <span class="ui-icon ui-icon-arrowreturnthick-1-w"></span>
+                Voltar
+              </h:link>
+            </div>
+
+          </div>
+
+        </p:panel>
+
+      </div>
+
+    </h:form>
+
+  </ui:define>
+
+</ui:composition>

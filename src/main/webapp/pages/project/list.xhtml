@@ -1,0 +1,77 @@
+<ui:composition template="/templates/app.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+  xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  <ui:define name="title">Projetos</ui:define>
+
+  <ui:define name="content">
+
+    <f:metadata>
+      <f:viewAction action="#{projectBean.loadForList}" />
+    </f:metadata>
+
+    <h:form id="form">
+
+      <p:growl id="growl" showDetail="true" />
+
+      <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" />
+
+      <div class="projects-page">
+
+        <p:panel header="Projetos" styleClass="crud-panel">
+
+          <div class="projects-actions">
+            <h:link outcome="edit" styleClass="ui-button crud-btn crud-btn-new">
+              Novo projeto
+            </h:link>
+          </div>
+
+          <p:dataTable id="table" value="#{projectBean.projects}" var="p" paginator="true" rows="10"
+            emptyMessage="Nenhum projeto encontrado." styleClass="projects-table">
+
+            <p:column headerText="Nome" sortBy="#{p.name}">
+              <h:outputText value="#{p.name}" />
+            </p:column>
+
+            <p:column headerText="Status" sortBy="#{p.status}">
+              <h:outputText value="#{p.status}" />
+            </p:column>
+
+            <p:column headerText="Orçamento">
+              <h:outputText value="#{p.budget}">
+                <f:convertNumber type="currency" currencySymbol="R$" />
+              </h:outputText>
+            </p:column>
+
+            <p:column headerText="Ações" style="width:120px;text-align:center">
+              <div class="crud-actions-col">
+
+                <h:link outcome="view" styleClass="crud-icon crud-icon--primary" title="Visualizar">
+                  <f:param name="id" value="#{p.id}" />
+                  <span class="ui-icon ui-icon-search"></span>
+                </h:link>
+
+                <h:link outcome="edit" styleClass="crud-icon crud-icon--primary" title="Editar">
+                  <f:param name="id" value="#{p.id}" />
+                  <span class="ui-icon ui-icon-pencil"></span>
+                </h:link>
+
+                <p:commandButton icon="ui-icon-trash" styleClass="crud-icon crud-icon--danger" title="Excluir"
+                  actionListener="#{projectBean.delete(p.id)}" update=":form:table :form:growl">
+                </p:commandButton>
+
+              </div>
+            </p:column>
+
+
+          </p:dataTable>
+
+        </p:panel>
+
+      </div>
+
+    </h:form>
+
+  </ui:define>
+
+</ui:composition>

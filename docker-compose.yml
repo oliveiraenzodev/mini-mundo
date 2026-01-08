@@ -10,6 +10,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/db/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mini_mundo -d mini_mundo"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   app:
     build: .
@@ -17,7 +22,8 @@ services:
       - "8080:8080"
       - "9990:9990"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_HOST: db
       DB_PORT: 5432

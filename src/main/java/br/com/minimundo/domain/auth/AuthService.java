@@ -2,42 +2,39 @@ package br.com.minimundo.domain.auth;
 
 import br.com.minimundo.domain.user.User;
 import br.com.minimundo.domain.user.UserRepository;
-import br.com.minimundo.infra.jpa.JPAUtil;
 
-import javax.persistence.EntityManager;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 
+@ApplicationScoped
 public class AuthService {
 
-  public AuthResult login(String email, String password) {
+  @Inject
+  private UserRepository repo;
 
+  public AuthResult login(String email, String password) {
     if (email == null || password == null) {
       return AuthResult.fail("E-mail ou senha inválidos.");
     }
 
-    EntityManager em = JPAUtil.getEntityManager();
-    try {
-      UserRepository repo = new UserRepository(em);
-      User user = repo.findByEmail(email.trim().toLowerCase());
+    User user = repo.findByEmail(email.trim().toLowerCase());
 
-      if (user == null || !PasswordHasher.matches(password, user.getPasswordHash())) {
-        return AuthResult.fail("E-mail ou senha inválidos.");
-      }
-
-      String token = JwtUtil.generateToken(user.getId(), user.getEmail());
-      return AuthResult.ok(token);
-
-    } finally {
-      em.close();
+    if (user == null || !PasswordHasher.matches(password, user.getPasswordHash())) {
+      return AuthResult.fail("E-mail ou senha inválidos.");
     }
+
+    String token = JwtUtil.generateToken(user.getId(), user.getEmail());
+    return AuthResult.ok(token);
   }
 
+  @Transactional
   public RegisterResult register(
       String name,
       String email,
       String password,
       String passwordConfirmation
   ) {
-
     if (name == null || name.trim().length() < 3) {
       return RegisterResult.fail("Nome completo deve ter no mínimo 3 caracteres.");
     }
@@ -54,38 +51,19 @@ public class AuthService {
       return RegisterResult.fail("Senha e confirmação devem coincidir.");
     }
 
-    EntityManager em = JPAUtil.getEntityManager();
+    String normalizedEmail = email.trim().toLowerCase();
 
-    try {
-      UserRepository repo = new UserRepository(em);
-
-      if (repo.existsByEmail(email.trim().toLowerCase())) {
-        return RegisterResult.fail("Este e-mail já está cadastrado.");
-      }
-
-      em.getTransaction().begin();
-
-      User user = new User();
-      user.setName(name.trim());
-      user.setEmail(email.trim().toLowerCase());
-      user.setPasswordHash(PasswordHasher.hash(password));
-
-      repo.save(user);
-
-      em.getTransaction().commit();
-      return RegisterResult.ok();
-
-    } catch (Exception e) {
-
-      if (em.getTransaction().isActive()) {
-        em.getTransaction().rollback();
-      }
-
-      e.printStackTrace();
-      return RegisterResult.fail("Erro ao cadastrar. Tente novamente.");
-
-    } finally {
-      em.close();
+    if (repo.existsByEmail(normalizedEmail)) {
+      return RegisterResult.fail("Este e-mail já está cadastrado.");
     }
+
+    User user = new User();
+    user.setName(name.trim());
+    user.setEmail(normalizedEmail);
+    user.setPasswordHash(PasswordHasher.hash(password));
+
+    repo.save(user);
+
+    return RegisterResult.ok();
   }
 }

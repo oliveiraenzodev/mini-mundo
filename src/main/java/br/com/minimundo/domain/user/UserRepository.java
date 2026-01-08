@@ -1,34 +1,33 @@
 package br.com.minimundo.domain.user;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
+@ApplicationScoped
 public class UserRepository {
 
-  private final EntityManager em;
-
-  public UserRepository(EntityManager em) {
-    this.em = em;
-  }
+  @PersistenceContext(unitName = "mini-mundo-pu")
+  private EntityManager em;
 
   public User findByEmail(String email) {
-    try {
-      Query q = em.createQuery("SELECT u FROM User u WHERE u.email = :email");
-      q.setParameter("email", email);
+    List<User> list = em
+        .createQuery("select u from User u where u.email = :email")
+        .setParameter("email", email)
+        .setMaxResults(1)
+        .getResultList();
 
-      return (User) q.getSingleResult();
-    } catch (NoResultException e) {
-      return null;
-    }
+    return list.isEmpty() ? null : list.get(0);
   }
 
   public boolean existsByEmail(String email) {
-    Query q = em.createQuery("SELECT COUNT(u) FROM User u WHERE u.email = :email");
-    q.setParameter("email", email);
+    Long total = (Long) em
+        .createQuery("select count(u.id) from User u where u.email = :email")
+        .setParameter("email", email)
+        .getSingleResult();
 
-    Long count = (Long) q.getSingleResult();
-    return count != null && count.longValue() > 0L;
+    return total != null && total > 0;
   }
 
   public void save(User user) {
