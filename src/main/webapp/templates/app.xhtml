@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title>
+    <ui:insert name="title">Mini Mundo</ui:insert>
+  </title>
+
+  <h:outputStylesheet library="css" name="admin.css" />
+  <h:outputStylesheet library="css" name="header.css" />
+  <h:outputStylesheet library="css" name="crud.css" />
+
+  <ui:insert name="styles" />
+</h:head>
+
+<h:body>
+
+  <ui:include src="/fragments/header.xhtml" />
+
+  <main class="app-page">
+    <ui:insert name="content" />
+  </main>
+
+</h:body>
+</html>
